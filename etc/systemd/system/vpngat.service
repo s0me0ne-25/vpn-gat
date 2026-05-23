@@ -1,0 +1,27 @@
+# place in /etc/systemd/system/vpngat.service and install with `systemd install vpngat.service`
+# note that if you change this file you will need to run `systemctl daemon-reload` to get systemd to notice
+[Unit]
+Description=VPN-GAT worker
+
+# After networking because we need that
+After=network.target
+
+[Service]
+
+# Simple services don't do any forking / background nonsence
+Type=simple
+
+# User with which to run the service
+User=user
+Group=user
+
+# Set the working directory for the application
+WorkingDirectory=/home/user
+ExecStart=/home/user/Desktop/runterm.sh
+
+# Restart policy, only on failure
+Restart=always
+
+[Install]
+# Start the service before we get to multi-user mode
+WantedBy=multi-user.target
