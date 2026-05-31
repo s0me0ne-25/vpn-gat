@@ -348,9 +348,6 @@ def main():
 
     debug(f"Using viewport size: {width}x{height}", end=' ')
 
-    # Choose random profile for this resolution (1..PROF_PER_SCREEN)
-    profile_num = random.randint(1, PROF_PER_SCREEN)
-    #profile_num = 1
     profile_path = os.path.join(PROFILES_DIR, f"{width}x{height}", str(profile_num))
     os.makedirs(profile_path, exist_ok=True)
     print(f"profile: {profile_num}")
