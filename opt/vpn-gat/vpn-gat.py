@@ -215,10 +215,10 @@ def set_geolocation(ws_url):
         debug(f"Failed to set geolocation via CDP: {e}")
 
 def check_wan_ip(expected_ip: str):
-    debug("Checking WAN IP via https://2ip.ru ...", end=' ')
+    debug("Checking WAN IP via https://ifconfig.me/ip ...", end=' ')
     try:
         result = subprocess.run(
-            ['curl', 'https://2ip.ru'],
+            ['curl', 'https://ifconfig.me/ip'],
             capture_output=True,
             text=True,
             check=True,
