@@ -127,6 +127,24 @@ class BackgroundScroller:
         try:
             self.ws = websocket.create_connection(self.ws_url, timeout=10)
             #debug("BackgroundScroller: WebSocket connected successfully")
+
+            # Grant global geolocation permissions via CDP
+            try:
+                geo_cmd = {
+                    "id": random.randint(10000, 999999),
+                    "method": "Browser.setPermission",
+                    "params": {
+                        "permission": {"name": "geolocation"},
+                        "setting": "granted"
+                        # Omitting "origin" applies this to all sites in the context
+                    }
+                }
+                self.ws.send(json.dumps(geo_cmd))
+                _ = self.ws.recv()  # consume response
+                debug("Global geolocation permission granted via CDP")
+            except Exception as e:
+                debug(f"Failed to grant geolocation permissions: {e}")
+
         except Exception as e:
             debug(f"Failed to connect to CDP websocket: {e}")
             return
