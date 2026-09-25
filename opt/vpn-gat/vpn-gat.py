@@ -376,6 +376,7 @@ def main():
         f"--user-data-dir={profile_path}",
         f"--window-size={width},{height}",
         "--no-first-run",
+        "--hide-crash-restore-bubble",
         #"--disable-infobars",
         #"--disable-extensions",
         "--disable-translate",
